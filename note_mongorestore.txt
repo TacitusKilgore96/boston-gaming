@@ -1,0 +1,19 @@
+ÅBN TERMINAL
+Cmd + Mellemrum -> Skriv "Terminal" -> Enter
+
+
+RESTORE DATABASEN
+mongorestore -d bostongaming ~/Desktop/mongodb/dump/bostongaming
+altså ~/Desktop/mongodb/dump/projektnavn
+
+
+HVIS DUS FÅR PERMISSION DENIED (EACCES)
+1. sudo chown -R $(whoami) ~/.mongodb
+2. (Tast Mac-kode + Enter)
+3. mkdir -p ~/.mongodb/mongosh
+
+
+TJEK AT DET VIRKER
+mongosh --eval "use bostongaming; db.getCollectionNames()"
+
+En pdf vedr. denne process er lagt ind i mappen "eksamensforberedelse"

@@ -1,0 +1,23 @@
+1. Restore MongoDB database
+
+2. laver projekt
+npx create-next-app@latest bostongamingproject --typescript --tailwind --eslint
+
+3. npm i
+
+4. laver mapperne; components, hooks, pages, types
+
+Opdeling af mappernes ansvar:
+components -> Modtager data fra hooket og viser det på skærmen med tailwind
+Ansvar: styrer kun det visuelle (UI). Den bekymrer sig ikke om hvordan fetch() fungerer.
+
+hooks      -> Henter, gemmer og manipulerer dataen (f.eks useProducts)
+Ansvar: at håndtere tilstand (state) og data-hentning. Det ved ikke, om dataen skal vises på en telefon, en laptop osv. Den henter blot dataen og leverer den videre.
+
+types      -> Definerer hvad data er (f.eks Product)
+Ansvar: at definere strukturen på data. Filerne indeholder ingen logik, ingen funktioner og intet UI. Hvis et felt i databasen ændrer navn, retter du det kun ét sted.
+
+
+pages.     -> I dette projekt, er det ikke bogstaveligt til andre 
+
+5. laver header og footer
