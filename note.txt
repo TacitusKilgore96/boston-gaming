@@ -21,3 +21,5 @@ Ansvar: at definere strukturen på data. Filerne indeholder ingen logik, ingen f
 pages.     -> I dette projekt, er det ikke bogstaveligt til andre 
 
 5. laver header og footer
+
+6. laver hero slider
