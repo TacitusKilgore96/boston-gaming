@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 
 type RequestOptions = {
     // Ekstra oplysninger, som kan bruges når API-kaldet sendes.
@@ -18,7 +18,7 @@ export default function useRequestData() {
 
     // T kaldes en generisk type. Den gør det muligt at fortælle TypeScript,
     // hvilken type data API'et forventes at returnere.
-    const makeRequest = async <T = unknown>(
+    const makeRequest = useCallback(async <T = unknown>(
         url: string,
         method: "GET" | "POST" | "PUT" | "PATCH" | "DELETE" = "GET",
         options: RequestOptions = {}
@@ -70,7 +70,7 @@ export default function useRequestData() {
             // Kører altid, både efter succes og fejl, så loading stopper korrekt.
             setIsLoading(false);
         }
-    };
+    }, []);
 
     // Gør funktionen og dens status tilgængelig for komponenten, der bruger hooken.
     return { makeRequest, data, isLoading, error };

@@ -18,8 +18,15 @@ types      -> Definerer hvad data er (f.eks Product)
 Ansvar: at definere strukturen på data. Filerne indeholder ingen logik, ingen funktioner og intet UI. Hvis et felt i databasen ændrer navn, retter du det kun ét sted.
 
 
-pages.     -> I dette projekt, er det ikke bogstaveligt til andre 
+pages.     -> I dette projekt, er det ikke ment bogstaveligt til andre sider, men til andre sektioner af forsiden.
 
 5. laver header og footer
 
 6. laver hero slider
+
+7. Requests:
+GET✅
+POST 
+PATCH 
+PUT 
+DELETE
