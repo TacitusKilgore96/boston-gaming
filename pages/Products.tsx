@@ -9,6 +9,7 @@ type Product = {
   productimage: string;
 };
 
+/* Produkt titlernes ID'er */
 const productIds = [
   "5f95d114595ad72688f9550e",
   "5f95d588595ad72688f9550f",
@@ -44,7 +45,7 @@ export default function Products() {
   return (
     <section className=" px-6 py-16 text-white">
       <div className="mb-15 pt-15">
-          <h2 className="mb-10 text-center text-4xl font-extrabold uppercase">Our Products</h2>
+          <h2 className="mb-10 text-center text-6xl font-extrabold uppercase">Our Products</h2>
           <div className="flex justify-center gap-4">
               <span className="border-1 mt-4.5 h-0.5 w-25"></span>
               <img src="/star-solid-full.svg" alt="" className="w-10 invert" />

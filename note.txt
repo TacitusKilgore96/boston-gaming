@@ -30,3 +30,7 @@ POST
 PATCH 
 PUT 
 DELETE
+
+8. Products section
+
+9. Design section med radio inputs
