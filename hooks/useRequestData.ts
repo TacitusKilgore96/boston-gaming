@@ -69,8 +69,9 @@ export default function useRequestData() {
                 throw new Error(`API request failed with status ${response.status}`);
             }
 
-            // Et 204-svar har ingen JSON-body og skal derfor give null.
-            const responseData = response.status === 204 ? null : await response.json();
+            // DELETE-routes kan svare med 200 eller 204 uden en body.
+            const responseText = await response.text();
+            const responseData = responseText ? JSON.parse(responseText) : null;
             // Gem svaret i state, så komponenter kan læse det via hookens data-værdi.
             setData(responseData);
             // Den generiske type gør det muligt for den kaldende komponent at type-sætte svaret.

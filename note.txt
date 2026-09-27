@@ -27,9 +27,9 @@ pages.     -> I dette projekt, er det ikke ment bogstaveligt til andre sider, me
 7. Requests:
 GET✅
 POST✅
-PATCH 
-PUT 
-DELETE
+PATCH✅
+PUT✅
+DELETE✅
 
 8. Products section
 
