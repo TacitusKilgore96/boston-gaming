@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react"
 import useRequestData from "@/hooks/useRequestData"
 import AboutAdminDiv from "@/components/AboutAdminDiv"
+import ScrollToTop from "@/components/ScrollToTop"
 
 /* Beskriver strukturen på en kontakt fra API'et */
 type Contact = {
@@ -153,6 +154,7 @@ const Admin = () => {
         <AboutAdminDiv />
         
       </div>
+      <ScrollToTop />
     </div>
   )
 }

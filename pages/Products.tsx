@@ -43,23 +43,46 @@ export default function Products() {
   }, [makeProductRequest]);
 
   return (
-    <section id="Products" className="scroll-mt-32 px-6 py-16 text-white">
-      <div className="mb-15 pt-15">
-          <h2 className="mb-10 text-center text-6xl font-extrabold uppercase">Our Products</h2>
-          <div className="flex justify-center gap-4">
-              <span className="border-1 mt-4.5 h-0.5 w-25"></span>
-              <img src="/star-solid-full.svg" alt="" className="w-10 invert" />
-              <span className="border-1 mt-4.5 h-0.5 w-25"></span>
-            </div>
+    <section id="Products" className="scroll-mt-20 px-4 py-12 sm:px-6 md:py-20 text-white max-w-7xl mx-auto">
+      {/* Sektion Overskrift Header */}
+      <div className="mb-10 sm:mb-14 text-center">
+        <h2 className="mb-4 sm:mb-6 text-3xl sm:text-5xl md:text-6xl font-extrabold uppercase tracking-tight">
+          Our Products
+        </h2>
+        
+        {/* Responsiv stjerne-divider */}
+        <div className="flex items-center justify-center gap-2 sm:gap-4">
+          <span className="h-[2px] bg-white/80 w-12 sm:w-20 md:w-25"></span>
+          <img src="/star-solid-full.svg" alt="" className="w-6 sm:w-8 md:w-10 invert" />
+          <span className="h-[2px] bg-white/80 w-12 sm:w-20 md:w-25"></span>
+        </div>
       </div>
-      {isLoading && <p className="text-center">Henter produkter...</p>}
-      {error && <p className="text-center">Produkterne kunne ikke hentes.</p>}
+
+      {isLoading && (
+        <p className="text-center text-lg text-gray-300">Henter produkter...</p>
+      )}
+
+      {error && (
+        <p className="text-center text-lg text-red-400">Produkterne kunne ikke hentes.</p>
+      )}
+
       {!isLoading && !error && (
-        <div className="mx-auto grid max-w-7xl gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-6 sm:gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
           {products.map((product) => (
-            <article className="flex flex-col overflow-hidden bg-[#f2f2f26a] text-center rounded-lg shadow-md" key={product._id}>
-              <p className="p-6 font-extrabold text-xl">{product.title}</p>
-              <img className="h-64 p-6 rounded-lg w-full" src={getImageUrl(product.productimage)} alt={product.title} />
+            <article 
+              className="flex flex-col justify-between overflow-hidden bg-[#f2f2f26a] text-center rounded-lg shadow-md hover:scale-[1.02] transition-transform duration-300" 
+              key={product._id}
+            >
+              <p className="p-4 sm:p-6 font-extrabold text-lg sm:text-xl uppercase">
+                {product.title}
+              </p>
+              <div className="p-4 sm:p-6 pt-0 flex justify-center items-center">
+                <img 
+                  className="h-48 sm:h-64 w-full object-contain rounded-lg" 
+                  src={getImageUrl(product.productimage)} 
+                  alt={product.title} 
+                />
+              </div>
             </article>
           ))}
         </div>

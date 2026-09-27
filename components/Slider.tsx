@@ -36,10 +36,8 @@ export default function Slider() {
 
   if (!slides.length) return null;
 
-  const slide = slides[activeSlide];
-
   return (
-    <div className="absolute inset-0 z-0 overflow-hidden text-2xl">
+    <div className="absolute inset-0 z-0 overflow-hidden text-base sm:text-xl md:text-2xl">
       {/* 1. Renders ALLE billeder oven på hinanden i absolutte lag */}
       {slides.map((item, index) => (
         <img
@@ -53,18 +51,23 @@ export default function Slider() {
       ))}
 
       {/* 2. Teksten og overlayet ligger øverst oven på billederne */}
-      <div className="absolute inset-0 z-20 flex items-center justify-center p-8 text-center text-white/85">
-        <div className="w-fit max-w-full bg-black/50 p-8">
-          <div className="flex flex-col items-center min-w-190 gap-10">
-            <h1 className="text-8xl font-extrabold">Boston Gaming</h1>
-            <div className="flex justify-center gap-4">
-              <span className="border-1 mt-4.5 h-0.5 w-25"></span>
-              <img src="/star-solid-full.svg" alt="" className="w-10 invert" />
-              <span className="border-1 mt-4.5 h-0.5 w-25"></span>
+      <div className="absolute inset-0 z-20 flex items-center justify-center p-4 sm:p-8 text-center text-white/85">
+        <div className="w-full max-w-2xl bg-black/50 p-4 sm:p-8 backdrop-blur-xs">
+          <div className="flex flex-col items-center w-full gap-4 sm:gap-6 md:gap-10">
+            {/* Responsiv overskrift: fra 4xl på mobil til 8xl på desktop */}
+            <h1 className="text-3xl sm:text-6xl md:text-8xl font-extrabold tracking-tight">
+              Boston Gaming
+            </h1>
+
+            {/* Responsiv stjerne-divider */}
+            <div className="flex items-center justify-center gap-2 sm:gap-4 w-full">
+              <span className="h-[2px] bg-white/80 w-12 sm:w-20 md:w-25"></span>
+              <img src="/star-solid-full.svg" alt="" className="w-6 sm:w-8 md:w-10 invert" />
+              <span className="h-[2px] bg-white/80 w-12 sm:w-20 md:w-25"></span>
             </div>
             
-            {/* Teksten skifter også glidende sammen med billedet */}
-            <p className="transition-all duration-500">
+            {/* Teksten skifter glidende sammen med billedet */}
+            <p className="transition-all duration-500 text-sm sm:text-lg md:text-2xl px-2">
               {slides[activeSlide].alttext}
             </p>
           </div>

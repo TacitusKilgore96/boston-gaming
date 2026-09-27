@@ -3,6 +3,7 @@ import Slider from "@/components/Slider";
 import About from "@/pages/About";
 import Design from "@/pages/Design";
 import Products from "@/pages/Products";
+import ScrollToTop from "@/components/ScrollToTop";
 
 export default function Home() {
   return (
@@ -37,6 +38,9 @@ export default function Home() {
         </section>
 
       </main>
+
+      {/* Scroll til toppen knap */}
+      <ScrollToTop />
     </div>
   );
 }

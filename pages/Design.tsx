@@ -17,8 +17,6 @@ type Gear = {
 };
 
 // Priserne ligger lokalt, fordi API'et ikke sender et price-felt endnu.
-// Nøglen er gear-itemets _id, så prisen kobles til det rigtige gear.
-// Ændr beløbene her, hvis du vil bruge andre priser.
 const gearPrices: Record<string, number> = {
   "5f99c37f3017c27f70b7068f": 89,
   "5f99c3903017c27f70b70690": 159,
@@ -40,19 +38,16 @@ const gearPrices: Record<string, number> = {
   "5f99c6853017c27f70b706a0": 89,
 };
 
-
 const Design = () => {
-  // Gemmer det valgte gear-id for hver kategori. Et objekt bruges, fordi
-  // brugeren må vælge ét produkt i hver kategori samtidig.
   const [selectedGear, setSelectedGear] = useState<Record<string, string>>({});
 
-  // Der bruges én hook-instans pr. API-kald, fordi hooken gemmer data fra
   const {
     makeRequest: makeCategoryRequest,
     data: gearCategoryData,
     isLoading: isCategoryLoading,
     error: categoryError,
   } = useRequestData();
+  
   const {
     makeRequest: makeGearRequest,
     data: gearData,
@@ -61,70 +56,76 @@ const Design = () => {
   } = useRequestData();
 
   useEffect(() => {
-    // Kategorierne bestemmer rækkefølgen og overskriften på hver gear-række.
     makeCategoryRequest<GearCategory[]>("/gearcategory", "GET");
-    // Gear-listen indeholder de konkrete valgmuligheder under hver kategori.
     makeGearRequest<Gear[]>("/gear", "GET");
   }, [makeCategoryRequest, makeGearRequest]);
 
-  // Hookens data-type er unknown, så den omdannes til de typer, API'et forventes
-  // at returnere. ?? [] gør, at .map() kan bruges, før kaldet er færdigt.
   const gearCategories = (gearCategoryData as GearCategory[] | null) ?? [];
   const gear = (gearData as Gear[] | null) ?? [];
   const isLoading = isCategoryLoading || isGearLoading;
   const hasError = categoryError || gearError;
-  // Object.values() henter alle valgte gear-id'er, hvorefter deres priser
-  // lægges sammen. ?? 0 gør beregningen robust, hvis et id mangler en pris.
+
   const total = Object.values(selectedGear).reduce(
     (sum, gearId) => sum + (gearPrices[gearId] ?? 0),
     0,
   );
 
   return (
-    <section id="Design" className="scroll-mt-32 px-6 py-16 text-white">
-      <h1 className="mb-10 text-center text-6xl font-extrabold uppercase">Design Your Own Rig!</h1>
-      <div className="flex justify-center gap-4">
-        <span className="mt-4.5 h-0.5 w-25 border-1"></span>
-        <img src="/star-solid-full.svg" alt="" className="w-10 invert" />
-        <span className="mt-4.5 h-0.5 w-25 border-1"></span>
+    <section id="Design" className="scroll-mt-20 px-4 py-12 sm:px-6 md:py-20 text-white max-w-7xl mx-auto">
+      {/* Sektion Overskrift Header */}
+      <div className="mb-8 sm:mb-12 text-center">
+        <h1 className="mb-4 sm:mb-6 text-3xl sm:text-5xl md:text-6xl font-extrabold uppercase tracking-tight">
+          Design Your Own Rig!
+        </h1>
+        
+        {/* Responsiv stjerne-divider */}
+        <div className="flex items-center justify-center gap-2 sm:gap-4">
+          <span className="h-[2px] bg-white/80 w-12 sm:w-20 md:w-25"></span>
+          <img src="/star-solid-full.svg" alt="" className="w-6 sm:w-8 md:w-10 invert" />
+          <span className="h-[2px] bg-white/80 w-12 sm:w-20 md:w-25"></span>
+        </div>
       </div>
 
-      <div className="mx-auto mt-8 grid max-w-5xl gap-8 md:grid-cols-[1.4fr_1fr]">
+      <div className="mx-auto mt-6 sm:mt-10 grid max-w-5xl gap-8 md:grid-cols-[1.4fr_1fr] items-start">
+        {/* Venstre side: Gear selection */}
         <div>
-          <h2 className="mb-3 text-center text-xl font-extrabold">Pick your gear</h2>
-          {isLoading && <p className="text-center">Henter gear...</p>}
-          {hasError && <p className="text-center">Gear kunne ikke hentes.</p>}
+          <h2 className="mb-4 text-center sm:text-left text-xl font-extrabold uppercase tracking-wider">
+            Pick your gear
+          </h2>
+          
+          {isLoading && <p className="text-center sm:text-left text-gray-300">Henter gear...</p>}
+          {hasError && <p className="text-center sm:text-left text-red-400">Gear kunne ikke hentes.</p>}
+          
           {!isLoading && !hasError && (
-            <div className="space-y-1">
-              {/* Én visuel række oprettes for hver kategori fra API'et. */}
+            <div className="space-y-2 sm:space-y-1">
               {gearCategories.map((category) => (
-                <div className="grid grid-cols-[6rem_1fr] gap-3 rounded bg-[#464646] px-3 py-2" key={category._id}>
-                  <h3 className="font-semibold">{category.gearcategorytitle}</h3>
-                  <div className="space-y-1">
-                    {/* Kun gear med samme kategori-id vises i denne række. */}
+                <div 
+                  className="grid grid-cols-1 sm:grid-cols-[7rem_1fr] gap-2 sm:gap-3 rounded bg-[#464646] p-3 sm:px-4 sm:py-3" 
+                  key={category._id}
+                >
+                  <h3 className="font-bold text-gray-200 border-b border-gray-500 pb-1 sm:border-0 sm:pb-0">
+                    {category.gearcategorytitle}
+                  </h3>
+                  <div className="space-y-1.5 sm:space-y-1">
                     {gear
                       .filter((item) => item.gearcategory._id === category._id)
                       .map((item) => (
-                        <label className="flex items-start gap-2" key={item._id}>
+                        <label className="flex items-center sm:items-start gap-2.5 cursor-pointer py-0.5 hover:text-gray-200 transition-colors" key={item._id}>
                           <input
                             type="radio"
-                            // Samme name pr. kategori betyder, at kun ét gear
-                            // kan vælges inden for den kategori.
                             name={`gear-${category._id}`}
                             value={item._id}
-                            className="mt-0.5 accent-blue-400"
+                            className="mt-0.5 h-4 w-4 shrink-0 accent-blue-400 cursor-pointer"
                             onChange={() => {
-                              // Når et radio-valg ændres, gemmes gear-id'et
-                              // under den aktuelle kategori og totalen opdateres.
                               setSelectedGear((currentSelection) => ({
                                 ...currentSelection,
                                 [category._id]: item._id,
                               }));
                             }}
                           />
-                          <span className="flex w-full justify-between gap-2">
+                          <span className="flex w-full justify-between gap-2 text-sm sm:text-base">
                             <span>{item.geartitle}</span>
-                            <span className="shrink-0">${gearPrices[item._id] ?? 0}</span>
+                            <span className="shrink-0 font-semibold">${gearPrices[item._id] ?? 0}</span>
                           </span>
                         </label>
                       ))}
@@ -135,17 +136,19 @@ const Design = () => {
           )}
         </div>
 
-        <div>
-          <h2 className="mb-3 text-center text-xl font-extrabold">Summary</h2>
-          <div className="flex min-h-10 justify-between rounded bg-white p-3 text-sm text-black">
-            <span>Total</span>
-            {/* toLocaleString formaterer tallet, så det er let at læse */}
-            <strong>${total.toLocaleString("en-US")}</strong>
+        {/* Højre side: Summary (bliver sticky øverst, når man scroller på mobil/tablet) */}
+        <div className="sticky top-20 z-30 md:static">
+          <h2 className="mb-4 text-center sm:text-left text-xl font-extrabold uppercase tracking-wider">
+            Summary
+          </h2>
+          <div className="flex items-center justify-between rounded bg-white p-4 text-base sm:text-lg text-black shadow-lg">
+            <span className="font-bold uppercase tracking-wide">Total</span>
+            <strong className="text-xl sm:text-2xl">${total.toLocaleString("en-US")}</strong>
           </div>
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default Design
+export default Design;
