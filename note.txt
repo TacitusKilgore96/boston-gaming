@@ -26,7 +26,7 @@ pages.     -> I dette projekt, er det ikke ment bogstaveligt til andre sider, me
 
 7. Requests:
 GET✅
-POST 
+POST✅
 PATCH 
 PUT 
 DELETE
@@ -34,3 +34,8 @@ DELETE
 8. Products section
 
 9. Design section med radio inputs
+
+10. About section, contact
+contact kan sende data til back-end (POST)
+
+11. Admin Page mhb. på PUT/PATCH/DELETE
