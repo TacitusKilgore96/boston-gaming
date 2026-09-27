@@ -43,7 +43,7 @@ export default function Products() {
   }, [makeProductRequest]);
 
   return (
-    <section className=" px-6 py-16 text-white">
+    <section id="Products" className="scroll-mt-32 px-6 py-16 text-white">
       <div className="mb-15 pt-15">
           <h2 className="mb-10 text-center text-6xl font-extrabold uppercase">Our Products</h2>
           <div className="flex justify-center gap-4">

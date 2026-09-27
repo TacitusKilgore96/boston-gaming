@@ -47,7 +47,6 @@ const Design = () => {
   const [selectedGear, setSelectedGear] = useState<Record<string, string>>({});
 
   // Der bruges én hook-instans pr. API-kald, fordi hooken gemmer data fra
-  // det seneste kald i sin egen state.
   const {
     makeRequest: makeCategoryRequest,
     data: gearCategoryData,
@@ -82,7 +81,7 @@ const Design = () => {
   );
 
   return (
-    <section className="px-6 py-16 text-white">
+    <section id="Design" className="scroll-mt-32 px-6 py-16 text-white">
       <h1 className="mb-10 text-center text-6xl font-extrabold uppercase">Design Your Own Rig!</h1>
       <div className="flex justify-center gap-4">
         <span className="mt-4.5 h-0.5 w-25 border-1"></span>
@@ -99,7 +98,7 @@ const Design = () => {
             <div className="space-y-1">
               {/* Én visuel række oprettes for hver kategori fra API'et. */}
               {gearCategories.map((category) => (
-                <div className="grid grid-cols-[6.5rem_1fr] gap-3 rounded bg-[#464646] px-3 py-2 text-xs" key={category._id}>
+                <div className="grid grid-cols-[6rem_1fr] gap-3 rounded bg-[#464646] px-3 py-2" key={category._id}>
                   <h3 className="font-semibold">{category.gearcategorytitle}</h3>
                   <div className="space-y-1">
                     {/* Kun gear med samme kategori-id vises i denne række. */}

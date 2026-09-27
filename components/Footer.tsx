@@ -31,7 +31,8 @@ const Footer = () => {
   return (
     <div className='mx-auto flex-col w-full text-center'>
         {/* parent div for LOCATION */}
-      <div className='bg-[#434343] [&_h1]:uppercase [&_h1]:font-extrabold [&_h1]:text-3xl grid grid-cols-3 p-20'>
+      <div className='bg-[#434343] [&_h1]:uppercase [&_h1]:font-extrabold [&_h1]:text-3xl [&_p]:text-xl [&_p]:text-white/70
+       grid grid-cols-3 p-20'>
 
         <div>
             <h1>Location</h1>
@@ -52,7 +53,7 @@ const Footer = () => {
 
         <div>
             <h1>About Boston Gaming</h1>
-          {!isLoading && !error && <p className='p-5'>{footer?.about}</p>}
+          {!isLoading && !error && <p className='p-5 w-[80%] text-center mx-auto'>{footer?.about}</p>}
         </div>
 
       </div>
