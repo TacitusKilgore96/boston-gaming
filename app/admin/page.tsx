@@ -51,7 +51,7 @@ const Admin = () => {
   /* CRASH PROTECTION */
   /* Sikrer, at data altid behandles som en liste. Forhindrer at appen kasserer med en fejl. 
   Fortæller TypeScript "stol på mig. de objekter der ligger i denne liste, følger formatet for en Contact"
-  TypeScript ved jo ikke på forhånd, hvad der kommer ud af dit custom hook */
+  TypeScript ved jo ikke på forhånd, hvad der kommer ud af mit custom hook */
   const contacts = (data ?? []) as Contact[]
 
   return (
